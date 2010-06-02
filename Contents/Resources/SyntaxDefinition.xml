@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<syntax>
+	<head>
+		<name>Markdown Syntax</name>
+		<autocompleteoptions use-spelling-dictionary="yes"/>
+		<charsintokens><![CDATA[_0987654321abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@]]></charsintokens>
+	</head>
+	<states>
+		<default id="Base" color="#000" inverted-color="#fff">
+		
+			<!-- Headers -->
+			<keywords id="Header" color="#CC0000" inverted-color="#cc66ff" font-weight="bold">
+				<regex>(^#{1,6}\s+[^#]+(?:#{0,99}))\n</regex>
+			</keywords>
+			<keywords id="Setext Header" color="#1A1AA6" font-weight="bold">
+				<regex>(^={3,})\n</regex>
+				<regex>(^-{3,})\n</regex>
+			</keywords>
+
+			<!-- Emphasis -->
+<!--
+			<state id="Bold" color="#000000" font-style="normal" font-weight="bold">
+				<begin><regex>\*\*(?=\S)</regex></begin>
+				<end><regex>(?&lt;=\S)\*\*</regex></end>
+			</state>
+			<state id="Bold Underscores" color="#000000" font-style="normal" font-weight="bold">
+				<begin><regex>__(?=\S)</regex></begin>
+				<end><regex>(?&lt;=\S)__</regex></end>
+			</state>
+			<state id="Italic" color="#000000" font-style="italic">
+				<begin><regex>\*(?=\S)</regex></begin>
+				<end><regex>(?&lt;=\S)\*</regex></end>
+			</state>
+			<state id="Italic Underscores" color="#000000" font-style="italic">
+				<begin><regex>_(?=\S)</regex></begin>
+				<end><regex>(?&lt;=\S)_</regex></end>
+			</state>
+-->
+			<keywords id="Italic" color="#000" font-style="italic">
+				<regex>_(?=\S)(.+?[*_]*)(?&lt;=\S)_</regex>
+				<regex>\*(?=\S)(.+?[*_]*)(?&lt;=\S)\*</regex>
+			</keywords>
+			<keywords id="Bold" color="#000" font-weight="bold" font-style="normal">
+				<regex>__(?=\S)(.+?[*_]*)(?&lt;=\S)__</regex>
+				<regex>\*\*(?=\S)(.+?[*_]*)(?&lt;=\S)\*\*</regex>
+			</keywords>
+
+			<!-- Links and Images -->
+			<keywords id="Link Text" color="#760f15" font-style="normal" font-weight="normal">
+				<regex>(?&lt;=\[)([^\]]*)(?=\]\s*[\(\[])</regex>
+			</keywords>
+			<keywords id="Link URL" color="#003369" font-style="normal" font-weight="normal">
+				<regex>(?&lt;=\])\s*(?:\()([^\)]*)(?=\)\s*)</regex>
+				<regex>(?&lt;=\])\s*:\s*(\S+(?:\s*".*?(((?&lt;!\\)(\\\\)*)|^)")?)(?=\s*)</regex>
+			</keywords>
+			<keywords id="Link ID" color="#FF0000" font-style="normal" font-weight="normal">
+				<regex>(?&lt;=\[)([^\]]*)(?=\]\s*:)</regex>
+			</keywords>
+			<keywords id="Link ID Ref" color="#FF0000" font-style="normal" font-weight="normal">
+				<regex>(?&lt;=\])\s*\[(\S+)(?=\]{1})</regex>
+			</keywords>
+
+			<!-- HTML-like Tags -->
+			<keywords id="Tags" color="#881280" useforautocomplete="no">
+					<regex>(&lt;[^&gt;]*&gt;)</regex>
+			</keywords>
+						
+			<state id="Inline Code" color="#666666" inverted-color="#ccc" font-weight="bold">
+				<begin><regex>`</regex></begin>
+				<end><regex>(?:(?&lt;!`)(``)*|^)`</regex></end>
+			</state>
+
+			<!-- This is not ideal. It should be a state, not a keyword. But it'll have to do for now. -->
+			<keywords id="Code Block" color="#666666" useforautocomplete="no">
+				<regex>^(?:\s{4,}?|\t{1,}?)(?!(?:[*+-]|\d+\.)\s{1})(.*)$</regex>
+			</keywords>
+
+			<keywords id="Horizontal Rules" color="#1A1AA6" font-weight="bold">
+				<regex>^[ ]{0,2}((?:[ ]?\*[ ]?){3,})[ \t]*$</regex>
+				<regex>^[ ]{0,2}((?:[ ]?-[ ]?){3,})[ \t]*$</regex>
+				<regex>^[ ]{0,2}((?:[ ]?_[ ]?){3,})[ \t]*$</regex>
+			</keywords>
+
+			<state id="List Items" color="#000" useforautocomplete="no">
+				<begin><regex>^\s*(?:[-+*]|[0-9]+\.)\s+.*?[^-+*\s].*?\n</regex></begin>
+				<end><regex>\n</regex></end>
+
+				<keywords id="List Item Italic" color="#000" font-style="italic" font-weight="normal">
+					<regex>_(?=\S)(.+?[*_]*)(?&lt;=\S)_</regex>
+					<regex>\*(?=\S)(.+?[*_]*)(?&lt;=\S)\*</regex>
+				</keywords>
+				<keywords id="List Item Bold" color="#000" font-weight="bold" font-style="normal">
+					<regex>__(?=\S)(.+?[*_]*)(?&lt;=\S)__</regex>
+					<regex>\*\*(?=\S)(.+?[*_]*)(?&lt;=\S)\*\*</regex>
+				</keywords>
+
+<!--
+				<keywords id="List Item Inline Code" color="#666" font-weight="bold">
+					<regex>`.*?((?&lt;!`)(?:``)*)`</regex>
+					<regex>`[^`]*`</regex>
+				</keywords>
+-->
+				<!-- Links and Images -->
+				<keywords id="List Item Link Text" color="#760f15" font-style="normal" font-weight="normal">
+					<regex>(?&lt;=\[)([^\]]*)(?=\]\s*[\(\[])</regex>
+				</keywords>
+				<keywords id="List Item Link URL" color="#003369" font-style="normal" font-weight="normal">
+					<regex>(?&lt;=\])\s*(?:\()([^\)]*)(?=\)\s*)</regex>
+					<regex>(?&lt;=\])\s*:\s*(\S+(?:\s*".*?(((?&lt;!\\)(\\\\)*)|^)")?)(?=\s*)</regex>
+				</keywords>
+				<keywords id="List Item Link ID" color="#FF0000" font-style="normal" font-weight="normal">
+					<regex>(?&lt;=\[)([^\]]*)(?=\]\s*:)</regex>
+				</keywords>
+				<keywords id="List Item Link ID Ref" color="#FF0000" font-style="normal" font-weight="normal">
+					<regex>(?&lt;=\])\s*\[(\S+)(?=\]{1})</regex>
+				</keywords>
+
+				<keywords id="Bullets" color="#881280" inverted-color="#FFA019" useforautocomplete="no" font-weight="bold">
+					<regex>^\s*([+\-*]\s)</regex>
+					<regex>^\s*([0-9]+\.\s)</regex>
+				</keywords>
+			</state>
+
+			<state id="Blockquotes" color="#003369" inverted-color="#00ff00"	font-style="italic" font-weight="normal">
+				<begin><regex>^(?:>.*)$</regex></begin>
+				<end><regex>\n</regex></end>
+
+				<keywords id="Quoted Header" color="#CC0000" inverted-color="#cc66ff" font-weight="bold">
+					<regex>^(?:>\s*)+(#{1,6}\s+[^#]+(?:#{0,99}))\n</regex>
+				</keywords>
+				<keywords id="Quoted Setext Header" color="#1A1AA6" font-weight="bold">
+					<regex>^(?:>\s*)+(={3,})\n</regex>
+					<regex>^(?:>\s*)+(-{3,})\n</regex>
+				</keywords>
+
+				<keywords id="Quoted Italic" color="#004080" font-style="normal">
+					<regex>_(?=\S)(.+?[*_]*)(?&lt;=\S)_</regex>
+					<regex>\*(?=\S)(.+?[*_]*)(?&lt;=\S)\*</regex>
+				</keywords>
+				<keywords id="Quoted Bold" color="#004080" font-weight="bold" font-style="italic">
+					<regex>__(?=\S)(.+?[*_]*)(?&lt;=\S)__</regex>
+					<regex>\*\*(?=\S)(.+?[*_]*)(?&lt;=\S)\*\*</regex>
+				</keywords>
+
+				<keywords id="Quoted Link Text" color="#760f15" font-style="normal" font-weight="normal">
+					<regex>(?&lt;=\[)([^\]]*)(?=\]\s*[\(\[])</regex>
+				</keywords>
+				<keywords id="Quoted Link URL" color="#003369" font-style="normal" font-weight="normal">
+					<regex>(?&lt;=\])\s*(?:\()([^\)]*)(?=\)\s*)</regex>
+					<regex>(?&lt;=\])\s*:\s*(\S+(?:\s*".*?(((?&lt;!\\)(\\\\)*)|^)")?)(?=\s*)</regex>
+				</keywords>
+				<keywords id="Quoted Link ID" color="#FF0000" font-style="normal" font-weight="normal">
+					<regex>(?&lt;=\[)([^\]]*)(?=\]\s*:)</regex>
+				</keywords>
+				<keywords id="Quoted Link ID Ref" color="#FF0000" font-style="normal" font-weight="normal">
+					<regex>(?&lt;=\])\s*\[(\S+)(?=\]{1})</regex>
+				</keywords>
+
+			</state>
+		</default>
+	</states>
+</syntax>

@@ -1,0 +1,6 @@
+/* Localized versions of Info.plist keys */
+
+CFBundleName = "Markdown";
+CFBundleShortVersionString = "0.1";
+CFBundleGetInfoString = "Markdown Mode 0.1";
+NSHumanReadableCopyright = "(c) Justin Hileman";
