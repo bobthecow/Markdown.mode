@@ -6,7 +6,7 @@
 		<charsintokens><![CDATA[_0987654321abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@]]></charsintokens>
 	</head>
 	<states>
-		<default id="Base" color="#000" inverted-color="#fff">
+		<default id="Base" color="#000" inverted-color="#fff" usespellchecking="yes">
 		
 			<!-- Headers -->
 			<keywords id="Header" color="#CC0000" inverted-color="#cc66ff" font-weight="bold">
