@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <symbols>
-	<symbol id="Title 1" font-weight="bold" image="Header1.png" indentation="0">
+	<symbol id="Header 1" font-weight="bold" image="Header1.tiff" indentation="0">
 		<regex>^#{1}\s+.*</regex>
 		<postprocess>
 			<find>#</find>
 			<replace></replace>
 		</postprocess>
 	</symbol>
-	<symbol id="Title 2" image="Header2.png" indentation="1">
+	<symbol id="Header 2" image="Header2.tiff" indentation="1">
 		<regex>^#{2}\s+.*</regex>
 		<postprocess>
 			<find>#</find>
 			<replace></replace>
 		</postprocess>	</symbol>
-	<symbol id="Title 3" image="Header3.png" indentation="2">
+	<symbol id="Header 3" image="Header3.tiff" indentation="2">
 		<regex>^#{3}\s+.*</regex>
 		<postprocess>
 			<find>#</find>
 			<replace></replace>
 		</postprocess>	</symbol>
-	<symbol id="Title 4" image="Header4.png" indentation="3">
+	<symbol id="Header 4" image="Header4.tiff" indentation="3">
 		<regex>^#{4}\s+.*</regex>
 		<postprocess>
 			<find>#</find>
 			<replace></replace>
 		</postprocess>	</symbol>
-	<symbol id="Title 5" image="Header5.png" indentation="4">
+	<symbol id="Header 5" image="Header5.tiff" indentation="4">
 		<regex>^#{5}\s+.*</regex>
 		<postprocess>
 			<find>#</find>
 			<replace></replace>
 		</postprocess>	</symbol>
-	<symbol id="Title 6" image="Header6.png" indentation="5">
+	<symbol id="Header 6" image="Header6.tiff" indentation="5">
 		<regex>^#{6}\s+.*</regex>
 		<postprocess>
 			<find>#</find>
 			<replace></replace>
 		</postprocess>	</symbol>
-	<symbol id="Setext Title 1" font-weight="bold" image="Header1.png" indentation="0">
+	<symbol id="Setext Header 1" font-weight="bold" image="Header1.tiff" indentation="0">
 		<regex>(^.*\n\={2,})\n</regex>
 		<postprocess>
 			<find>\=*</find>
@@ -46,7 +46,7 @@
 			<replace></replace>
 		</postprocess>
 	</symbol>
-	<symbol id="Setext 2" image="Header2.png" indentation="1">
+	<symbol id="Setext Header 2" image="Header2.tiff" indentation="1">
 		<regex>(^.*\n\-{2,})\n</regex>
 		<postprocess>
 			<find>\-*</find>
