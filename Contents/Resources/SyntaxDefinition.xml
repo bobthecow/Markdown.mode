@@ -10,11 +10,11 @@
 		
 			<!-- Headers -->
 			<keywords id="Header" color="#CC0000" inverted-color="#cc66ff" font-weight="bold">
-				<regex>(^#{1,6}\s+[^#]+(?:#{0,99}))\n</regex>
+				<regex>(^#{1,6}\s+[^#]+(?:#{0,99}))[\n\r]</regex>
 			</keywords>
 			<keywords id="Setext Header" color="#1A1AA6" font-weight="bold">
-				<regex>(^={3,})\n</regex>
-				<regex>(^-{3,})\n</regex>
+				<regex>(^={3,})[\n\r]</regex>
+				<regex>(^-{3,})[\n\r]</regex>
 			</keywords>
 
 			<!-- Emphasis -->
@@ -62,9 +62,9 @@
 
 			<!-- HTML-like Tags -->
 			<keywords id="Tags" color="#881280" useforautocomplete="no">
-					<regex>(&lt;[^&gt;]*&gt;)</regex>
+				<regex>(&lt;[^&gt;]*&gt;)</regex>
 			</keywords>
-						
+
 			<state id="Inline Code" color="#666666" inverted-color="#ccc" font-weight="bold">
 				<begin><regex>`</regex></begin>
 				<end><regex>(?:(?&lt;!`)(``)*|^)`</regex></end>
@@ -123,14 +123,14 @@
 
 			<state id="Blockquotes" color="#003369" inverted-color="#00ff00"	font-style="italic" font-weight="normal">
 				<begin><regex>^(?:>.*)$</regex></begin>
-				<end><regex>\n</regex></end>
+				<end><regex>[\n\r]</regex></end>
 
 				<keywords id="Quoted Header" color="#CC0000" inverted-color="#cc66ff" font-weight="bold">
-					<regex>^(?:>\s*)+(#{1,6}\s+[^#]+(?:#{0,99}))\n</regex>
+					<regex>^(?:>\s*)+(#{1,6}\s+[^#]+(?:#{0,99}))[\n\r]</regex>
 				</keywords>
 				<keywords id="Quoted Setext Header" color="#1A1AA6" font-weight="bold">
-					<regex>^(?:>\s*)+(={3,})\n</regex>
-					<regex>^(?:>\s*)+(-{3,})\n</regex>
+					<regex>^(?:>\s*)+(={3,})[\n\r]</regex>
+					<regex>^(?:>\s*)+(-{3,})[\n\r]</regex>
 				</keywords>
 
 				<keywords id="Quoted Italic" color="#004080" font-style="normal">
