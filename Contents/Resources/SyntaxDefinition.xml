@@ -82,8 +82,8 @@
 			</keywords>
 
 			<state id="List Items" color="#000" useforautocomplete="no">
-				<begin><regex>^\s*(?:[-+*]|[0-9]+\.)\s+.*?[^-+*\s].*?\n</regex></begin>
-				<end><regex>\n</regex></end>
+				<begin><regex>^\s*(?:[-+*]|[0-9]+\.)\s+.*?[^-+*\s].*?</regex></begin>
+				<end><regex>[\n\r]</regex></end>
 
 				<keywords id="List Item Italic" color="#000" font-style="italic" font-weight="normal">
 					<regex>_(?=\S)(.+?[*_]*)(?&lt;=\S)_</regex>
