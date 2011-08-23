@@ -70,10 +70,10 @@
 				<end><regex>(?:(?&lt;!`)(``)*|^)`</regex></end>
 			</state>
 
-			<!-- This is not ideal. It should be a state, not a keyword. But it'll have to do for now. -->
-			<keywords id="Code Block" color="#666666" useforautocomplete="no">
-				<regex>^(?:\s{4,}?|\t{1,}?)(?!(?:[*+-]|\d+\.)\s{1})(.*)$</regex>
-			</keywords>
+			<state id="Code Block" color="#666666" useforautocomplete="no">
+				<begin><regex>^(?:\s{4,}?|\t{1,}?)(?!(?:[*+-]|\d+\.)\s{1})</regex></begin>
+				<end><regex>[\n\r]</regex></end>
+			</state>
 
 			<keywords id="Horizontal Rules" color="#1A1AA6" font-weight="bold">
 				<regex>^[ ]{0,2}((?:[ ]?\*[ ]?){3,})[ \t]*$</regex>
