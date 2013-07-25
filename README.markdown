@@ -8,7 +8,7 @@ A Markdown syntax mode file for [Coda](http://panic.com/coda) (and possibly [Sub
 Installation
 ------------
 
-Drop `Markdown.mode` into `~Library/Application Support/Coda 2/Modes` (or `.../Coda/Modes`
+Drop `Markdown.mode` into `~/Library/Application Support/Coda 2/Modes` (or `.../Coda/Modes`
 if you're not using Coda 2). If that folder doesn't exist, create it.
 
 
