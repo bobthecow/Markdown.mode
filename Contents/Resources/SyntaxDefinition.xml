@@ -10,7 +10,7 @@
 
 			<!-- Headers -->
 			<keywords id="Header" color="#CC0000" inverted-color="#cc66ff" font-weight="bold" scope="support.header.markdown">
-				<regex>(^#{1,6}\s+[^#]+(?:#{0,99}))[\n\r]</regex>
+				<regex>(^#{1,6}\s+[^#\n\r]+(?:#{0,99}))[\n\r]</regex>
 			</keywords>
 			<keywords id="Setext Header" color="#1A1AA6" font-weight="bold" scope="support.header.markdown">
 				<regex>(^={3,})[\n\r]</regex>
