@@ -1,161 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <syntax>
 	<head>
-		<name>Markdown</name>
-		<autocompleteoptions use-spelling-dictionary="yes"/>
+		<name>Markdown BR</name>
 		<charsintokens><![CDATA[_0987654321abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@]]></charsintokens>
 	</head>
+
 	<states>
-		<default id="Base" color="#000" inverted-color="#fff" usespellchecking="yes">
+		<default id="Base" scope="meta.default" usespellchecking="yes">
 
-			<!-- Headers -->
-			<keywords id="Header" color="#CC0000" inverted-color="#cc66ff" font-weight="bold" scope="support.header.markdown">
-				<regex>(^#{1,6}\s+[^#\n\r]+(?:#{0,99}))[\n\r]</regex>
-			</keywords>
-			<keywords id="Setext Header" color="#1A1AA6" font-weight="bold" scope="support.header.markdown">
-				<regex>(^={3,})[\n\r]</regex>
-				<regex>(^-{3,})[\n\r]</regex>
-			</keywords>
-
-			<!-- Emphasis -->
-<!--
-			<state id="Bold" color="#000000" font-style="normal" font-weight="bold">
-				<begin><regex>\*\*(?=\S)</regex></begin>
-				<end><regex>(?&lt;=\S)\*\*</regex></end>
-			</state>
-			<state id="Bold Underscores" color="#000000" font-style="normal" font-weight="bold">
-				<begin><regex>__(?=\S)</regex></begin>
-				<end><regex>(?&lt;=\S)__</regex></end>
-			</state>
-			<state id="Italic" color="#000000" font-style="italic">
-				<begin><regex>\*(?=\S)</regex></begin>
-				<end><regex>(?&lt;=\S)\*</regex></end>
-			</state>
-			<state id="Italic Underscores" color="#000000" font-style="italic">
-				<begin><regex>_(?=\S)</regex></begin>
-				<end><regex>(?&lt;=\S)_</regex></end>
-			</state>
--->
-			<keywords id="Italic" color="#000" font-style="italic">
-				<regex>_(?=\S)(.+?[*_]*)(?&lt;=\S)_</regex>
-				<regex>\*(?=\S)(.+?[*_]*)(?&lt;=\S)\*</regex>
-			</keywords>
-			<keywords id="Bold" color="#000" font-weight="bold" font-style="normal">
-				<regex>__(?=\S)(.+?[*_]*)(?&lt;=\S)__</regex>
-				<regex>\*\*(?=\S)(.+?[*_]*)(?&lt;=\S)\*\*</regex>
-			</keywords>
-
-			<!-- Links and Images -->
-			<keywords id="Link Text" color="#760f15" font-style="normal" font-weight="normal" scope="string.link.markdown">
-				<regex>(?&lt;=\[)([^\]]*)(?=\]\s*[\(\[])</regex>
-			</keywords>
-			<keywords id="Link URL" color="#003369" font-style="normal" font-weight="normal" scope="keyword.link.markdown">
-				<regex>(?&lt;=\])\s*(?:\()([^\)]*)(?=\)\s*)</regex>
-				<regex>(?&lt;=\])\s*:\s*(\S+(?:\s*".*?(((?&lt;!\\)(\\\\)*)|^)")?)(?=\s*)</regex>
-			</keywords>
-			<keywords id="Link ID" color="#FF0000" font-style="normal" font-weight="normal" scope="language.variable.link.markdown">
-				<regex>(?&lt;=\[)([^\]]*)(?=\]\s*:)</regex>
-			</keywords>
-			<keywords id="Link ID Ref" color="#FF0000" font-style="normal" font-weight="normal" scope="language.variable.link.markdown">
-				<regex>(?&lt;=\])\s*\[(\S+)(?=\]{1})</regex>
-			</keywords>
-
-			<!-- HTML-like Tags -->
-			<keywords id="Tags" color="#881280" useforautocomplete="no" scope="markup.tag.html.markdown">
-				<regex>(&lt;[^&gt;]*&gt;)</regex>
-			</keywords>
-
-			<state id="Inline Code" color="#666666" inverted-color="#ccc" font-weight="bold" scope="markup.processing.code.markdown">
-				<begin><regex>`</regex></begin>
-				<end><regex>(?:(?&lt;!`)(``)*|^)`</regex></end>
-			</state>
-
-			<state id="Code Block" color="#666666" useforautocomplete="no" scope="markup.processing.code.markdown">
-				<begin><regex>^(?:\s{4,}?|\t{1,}?)(?!(?:[*+-]|\d+\.)\s{1})</regex></begin>
+			<state id="Tags" casesensitive="no" scope="markup.tag">
+				<begin><regex>^[ \t]*#</regex></begin>
 				<end><regex>[\n\r]</regex></end>
 			</state>
 
-			<keywords id="Horizontal Rules" color="#1A1AA6" font-weight="bold" scope="keyword.rule.markdown">
-				<regex>^[ ]{0,2}((?:[ ]?\*[ ]?){3,})[ \t]*$</regex>
-				<regex>^[ ]{0,2}((?:[ ]?-[ ]?){3,})[ \t]*$</regex>
-				<regex>^[ ]{0,2}((?:[ ]?_[ ]?){3,})[ \t]*$</regex>
+			<keywords id="Tag Line" casesensitive="no" scope="markup.tag.attribute.name">
+				<regex>^(-{3,})(?=[ \t]*[\r\n]|$)</regex>
 			</keywords>
 
-			<state id="List Items" color="#000" useforautocomplete="no">
-				<begin><regex>^\s*(?:[-+*]|[0-9]+\.)\s+.*?[^-+*\s].*?</regex></begin>
+			<state name="Quote" casesensitive="no" scope="style.value.string.double">
+				<begin><regex>^[ \t]*&gt;</regex></begin>
 				<end><regex>[\n\r]</regex></end>
-
-				<keywords id="List Item Italic" color="#000" font-style="italic" font-weight="normal">
-					<regex>_(?=\S)(.+?[*_]*)(?&lt;=\S)_</regex>
-					<regex>\*(?=\S)(.+?[*_]*)(?&lt;=\S)\*</regex>
-				</keywords>
-				<keywords id="List Item Bold" color="#000" font-weight="bold" font-style="normal">
-					<regex>__(?=\S)(.+?[*_]*)(?&lt;=\S)__</regex>
-					<regex>\*\*(?=\S)(.+?[*_]*)(?&lt;=\S)\*\*</regex>
-				</keywords>
-
-<!--
-				<keywords id="List Item Inline Code" color="#666" font-weight="bold">
-					<regex>`.*?((?&lt;!`)(?:``)*)`</regex>
-					<regex>`[^`]*`</regex>
-				</keywords>
--->
-				<!-- Links and Images -->
-				<keywords id="List Item Link Text" color="#760f15" font-style="normal" font-weight="normal" scope="string.link.markdown">
-					<regex>(?&lt;=\[)([^\]]*)(?=\]\s*[\(\[])</regex>
-				</keywords>
-				<keywords id="List Item Link URL" color="#003369" font-style="normal" font-weight="normal" scope="keyword.link.markdown">
-					<regex>(?&lt;=\])\s*(?:\()([^\)]*)(?=\)\s*)</regex>
-					<regex>(?&lt;=\])\s*:\s*(\S+(?:\s*".*?(((?&lt;!\\)(\\\\)*)|^)")?)(?=\s*)</regex>
-				</keywords>
-				<keywords id="List Item Link ID" color="#FF0000" font-style="normal" font-weight="normal" scope="language.variable.link.markdown">
-					<regex>(?&lt;=\[)([^\]]*)(?=\]\s*:)</regex>
-				</keywords>
-				<keywords id="List Item Link ID Ref" color="#FF0000" font-style="normal" font-weight="normal" scope="language.variable.link.markdown">
-					<regex>(?&lt;=\])\s*\[(\S+)(?=\]{1})</regex>
-				</keywords>
-
-				<keywords id="Bullets" color="#881280" inverted-color="#FFA019" useforautocomplete="no" font-weight="bold" scope="keyword.bullet.markdown">
-					<regex>^\s*([+\-*]\s)</regex>
-					<regex>^\s*([0-9]+\.\s)</regex>
-				</keywords>
 			</state>
 
-			<state id="Blockquotes" color="#003369" inverted-color="#00ff00"	font-style="italic" font-weight="normal">
-				<begin><regex>^(?:>.*)$</regex></begin>
-				<end><regex>[\n\r]</regex></end>
+			<keywords id="Strike" casesennsitive="no" scope="markup.tag.attribute.value.string">
+				<regex>(~~(?!\s).+?(?!\s)~~)</regex>
+			</keywords>
 
-				<keywords id="Quoted Header" color="#CC0000" inverted-color="#cc66ff" font-weight="bold" scope="support.header.markdown">
-					<regex>^(?:>\s*)+(#{1,6}\s+[^#]+(?:#{0,99}))[\n\r]</regex>
-				</keywords>
-				<keywords id="Quoted Setext Header" color="#1A1AA6" font-weight="bold" scope="support.header.markdown">
-					<regex>^(?:>\s*)+(={3,})[\n\r]</regex>
-					<regex>^(?:>\s*)+(-{3,})[\n\r]</regex>
+			<state id="Code" type="string" scope="string.single.backtick" usespellchecking="no">
+				<begin><regex>`</regex><autoend>`</autoend></begin>
+				<end><regex>(((?&lt;!\\)(\\\\)*)|^)`</regex></end>
+			</state>
+
+			<keywords id="List Delimiters" scope="markup.tag.attribute.list">
+				<regex>^[ \t]*([*+-])[ \t]</regex>
+				<regex>^[ \t]*([0-9]+\.)[ \t]</regex>
+			</keywords>
+
+			<keywords id="Horizontal Rule" scope="markup.tag.attribute.rule">
+				<regex>^(---|\*\*\*|___)\s*[\r\n]|$</regex>
+			</keywords>
+
+			<keywords id="Emphasis" scope="markup.tag.attribute.emphasis">
+				<regex>(\*\*[^\*\r\n]+?\*\*)</regex>
+				<regex>(\*[^\*\r\n]+?\*)</regex>
+				<regex>(__[^_\r\n]+?__)</regex>
+				<regex>(_[^_\r\n]+?_)</regex>
+			</keywords>
+
+			<state id="Image" scope="string.symbol" usespellchecking="no">
+				<begin><regex>\!\[</regex></begin>
+				<end><regex>\]</regex></end>
+			</state>
+
+			<state id="Link Name" scope="string.symbol" usespellchecking="no">
+				<begin><regex>\[</regex></begin>
+				<end><regex>\]</regex></end>
+				<state-link state="Image"/>
+			</state>
+
+			<keywords name="Link Name 2" scope="markup.tag.attribute.name" usespellchecking="no">
+				<regex>\[(.*?)\]:</regex>
+			</keywords>
+
+			<keywords name="Link" scope="meta.link" usespellchecking="no">
+				<regex>(?&lt;=\])\(([^\r\n\)]*)\)</regex>
+				<regex>(?&lt;=\])\[([^\r\n\]]*)\]</regex>
+			</keywords>
+
+			<keywords name="Link 2" scope="meta.link" usespellchecking="no">
+				<regex>(?&lt;=\]:)[ \t]*([^\r\n]*)</regex>
+			</keywords>
+
+			<state id="Included YAML" scope="markup.tag.attribute.value" usespellchecking="no" >
+				<begin><regex>^[-]{3}</regex></begin>
+				<end><regex>[-]{3}$</regex></end>
+
+				<keywords id="Keywords" casesensitive="no" scope="markup.tag.attribute.name">
+					<regex>^(.*?):</regex>
 				</keywords>
 
-				<keywords id="Quoted Italic" color="#004080" font-style="normal">
-					<regex>_(?=\S)(.+?[*_]*)(?&lt;=\S)_</regex>
-					<regex>\*(?=\S)(.+?[*_]*)(?&lt;=\S)\*</regex>
-				</keywords>
-				<keywords id="Quoted Bold" color="#004080" font-weight="bold" font-style="italic">
-					<regex>__(?=\S)(.+?[*_]*)(?&lt;=\S)__</regex>
-					<regex>\*\*(?=\S)(.+?[*_]*)(?&lt;=\S)\*\*</regex>
-				</keywords>
+				<state id="Comment" scope="style.comment.block">
+					<begin><regex>#</regex></begin>
+					<end><regex>[\n\r]</regex></end>
+				</state>
 
-				<keywords id="Quoted Link Text" color="#760f15" font-style="normal" font-weight="normal" scope="string.link.markdown">
-					<regex>(?&lt;=\[)([^\]]*)(?=\]\s*[\(\[])</regex>
-				</keywords>
-				<keywords id="Quoted Link URL" color="#003369" font-style="normal" font-weight="normal" scope="keyword.link.markdown">
-					<regex>(?&lt;=\])\s*(?:\()([^\)]*)(?=\)\s*)</regex>
-					<regex>(?&lt;=\])\s*:\s*(\S+(?:\s*".*?(((?&lt;!\\)(\\\\)*)|^)")?)(?=\s*)</regex>
-				</keywords>
-				<keywords id="Quoted Link ID" color="#FF0000" font-style="normal" font-weight="normal" scope="language.variable.link.markdown">
-					<regex>(?&lt;=\[)([^\]]*)(?=\]\s*:)</regex>
-				</keywords>
-				<keywords id="Quoted Link ID Ref" color="#FF0000" font-style="normal" font-weight="normal" scope="language.variable.link.markdown">
-					<regex>(?&lt;=\])\s*\[(\S+)(?=\]{1})</regex>
-				</keywords>
+				<state id="String" scope="style.value.string.double">
+					<begin><regex>"</regex></begin>
+					<end><regex>(?&lt;!\\)(\\\\)*"</regex></end>
+				</state>
 
+				<state id="SingleString" scope="style.value.string.single">
+					<begin><string>'</string></begin>
+					<end><regex>(?&lt;!\\)(\\\\)*'</regex></end>
+				</state>
 			</state>
 		</default>
 	</states>
